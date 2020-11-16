@@ -1,40 +1,22 @@
-#pragma once
-#include <vector>
-
-#include "Point.h"
-#include "Dimension.h"
-#include "glad/glad.h"
-
-class Rect
-{
-	Point topLeft;
-	Point bottomRight;
-	float z = 0.0f;
-
-public:
-    Rect();
-	Rect(const Point& topLeft, const Point& bottomRight, float z);
-    void move(const Point& vector);
-    void resize(const Dimension& dimension);
-	std::vector<GLfloat> getVertices();
-    std::vector<GLuint> getIndices();
-};
+#include "Oswafeed/Rect.h"
+#include "Oswafeed/Point.h"
+#include "Oswafeed/Dimension.h"
 
 Rect::Rect()
 {
 
 }
 
-Rect::Rect(const Point& topLeft, const Point& bottomRight, float z) : 
-	topLeft(topLeft), bottomRight(bottomRight), z(z)
+Rect::Rect(const Point& topLeft, const Point& bottomRight, float z) :
+    topLeft(topLeft), bottomRight(bottomRight), z(z)
 {
 
 }
 
 std::vector<GLfloat> Rect::getVertices()
 {
-	std::vector<GLfloat> vertices;
-	const float unit = 1.0f / 100.0f;
+    std::vector<GLfloat> vertices;
+    const float unit = 1.0f / 100.0f;
 
     // Top right
     vertices.push_back(bottomRight.x * unit);
@@ -55,7 +37,7 @@ std::vector<GLfloat> Rect::getVertices()
     vertices.push_back(topLeft.x * unit);
     vertices.push_back(topLeft.y * unit);
     vertices.push_back(z);
-    
+
     return std::move(vertices);
 }
 

@@ -1,19 +1,7 @@
-#pragma once
 #include <vector>
-#include "Item.h"
-#include "Rect.h"
 
-class Scroller
-{
-	int selected = 0;
-	std::vector<Item> items;
-public:
-	Scroller() = default;
-	void add(Item&& item);
-	void moveLeft();
-	void moveRight();
-	void clear();
-};
+#include "Oswafeed/Scroller.h"
+#include "Oswafeed/Item.h"
 
 void Scroller::add(Item&& item)
 {

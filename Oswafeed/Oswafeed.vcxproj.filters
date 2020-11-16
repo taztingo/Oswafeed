@@ -1,22 +1,110 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{25a58543-4d01-426a-beda-07e4167a45cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{c5c7f455-5c0e-4803-a8f7-3dcff827f9a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{906817f3-1d61-4a07-a329-d07ddf40fd80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Oswafeed.cpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="external\stb.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\Dimension.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\Image.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\Item.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\ItemService.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\Point.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\Rect.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\Scroller.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\Shader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\KHR\khrplatform.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glad\glad.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLFW\glfw3.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLFW\glfw3native.h">
+      <Filter>External</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Oswafeed.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\executable.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\executable2_qUx_12.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\executable.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\background-compress.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Dimension.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Image.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Item.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemService.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Oswafeed.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Point.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rect.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scroller.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="include\glad\glad.c">
+      <Filter>External</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

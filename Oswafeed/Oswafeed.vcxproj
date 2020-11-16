@@ -125,13 +125,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\JSON\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\Foundation\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\NetSSL_Win\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\Net\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\external</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;PocoJSONd.lib;OpenGL32.lib;PocoNetd.lib;PocoFoundationd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\bin\lib\Debug;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,7 +142,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\include;C:\GL\glad\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,11 +150,44 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3dll.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Oswafeed.cpp" />
+    <ClInclude Include="external\stb.h" />
+    <ClInclude Include="include\glad\glad.h" />
+    <ClInclude Include="include\GLFW\glfw3.h" />
+    <ClInclude Include="include\GLFW\glfw3native.h" />
+    <ClInclude Include="include\KHR\khrplatform.h" />
+    <ClInclude Include="include\Oswafeed\Dimension.h" />
+    <ClInclude Include="include\Oswafeed\Image.h" />
+    <ClInclude Include="include\Oswafeed\Item.h" />
+    <ClInclude Include="include\Oswafeed\ItemService.h" />
+    <ClInclude Include="include\Oswafeed\Point.h" />
+    <ClInclude Include="include\Oswafeed\Rect.h" />
+    <ClInclude Include="include\Oswafeed\Scroller.h" />
+    <ClInclude Include="include\Oswafeed\Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Oswafeed.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\background-compress.jpg" />
+    <Image Include="resources\executable.ico" />
+    <Image Include="resources\executable.png" />
+    <Image Include="resources\executable2_qUx_12.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="include\glad\glad.c" />
+    <ClCompile Include="src\Dimension.cpp" />
+    <ClCompile Include="src\Image.cpp" />
+    <ClCompile Include="src\Item.cpp" />
+    <ClCompile Include="src\ItemService.cpp" />
+    <ClCompile Include="src\Oswafeed.cpp" />
+    <ClCompile Include="src\Point.cpp" />
+    <ClCompile Include="src\Rect.cpp" />
+    <ClCompile Include="src\Scroller.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

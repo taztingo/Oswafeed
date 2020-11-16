@@ -1,11 +1,9 @@
 #pragma once
 
-#include <string>
 #include <memory>
 #include <istream>
 #include "Rect.h"
-#include "Point.h"
-#include "Dimension.h"
+
 
 class Image
 {
@@ -14,8 +12,3 @@ class Image
 public:
 	Image(std::unique_ptr<std::istream> image);
 };
-
-Image::Image(std::unique_ptr<std::istream> image)
-	: image(std::move(image))
-{
-}
