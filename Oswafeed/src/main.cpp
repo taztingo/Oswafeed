@@ -1,15 +1,17 @@
 #include <iostream>
+#include <vector>
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include <vector>
-#include "Shader.h"
-#include "Rect.h"
-#include "ItemService.h"
+
+#include "Oswafeed/Shader.h"
+#include "Oswafeed/Rect.h"
+#include "Oswafeed/ItemService.h"
+#include "Oswafeed/Item.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb.h"
 
-void error_callback(int error, const char* description)
+/*void error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
 }
@@ -60,11 +62,11 @@ void initialize()
     float padding = unit * 1;
     float topPadding = 1 - (3 * unit);
 
-    /*std::vector<Rect> rects;
-    for (int i = 0; i < rects; i++)
-    {
-
-    }*/
+    //std::vector<Rect> rects;
+    //for (int i = 0; i < rects; i++)
+    //{
+    //
+    //}
 
     float xLocation = -1 + padding;
     for (int i = 0; i < rects; i++) {
@@ -207,7 +209,7 @@ void initialize()
 
     glfwDestroyWindow(window);
     glfwTerminate();
-}
+}*/
 
 void test()
 {
@@ -224,6 +226,8 @@ void test()
 int main()
 {
     test();
+    std::string a;
+    std::cin >> a;
     //initialize();
     return 0;
 }
