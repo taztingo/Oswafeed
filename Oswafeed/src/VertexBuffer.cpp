@@ -1,4 +1,4 @@
-#include "Oswafeed/VerterBuffer.h"
+#include "Oswafeed/VertexBuffer.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
@@ -14,12 +14,12 @@ VertexBuffer::~VertexBuffer()
 	glDeleteBuffers(1, &m_renderId);
 }
 
-void VertexBuffer::Bind()
+void VertexBuffer::bind() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, m_renderId);
 }
 
-void VertexBuffer::Unbind()
+void VertexBuffer::unbind() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

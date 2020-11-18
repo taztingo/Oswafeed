@@ -133,6 +133,9 @@
       <AdditionalDependencies>glfw3dll.lib;PocoJSONd.lib;OpenGL32.lib;PocoNetd.lib;PocoFoundationd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\bin\lib\Debug;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d  "$(ProjectDir)*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -142,16 +145,19 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\include;C:\GL\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\JSON\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\Foundation\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\NetSSL_Win\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\Net\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\include;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\external</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3dll.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\tazti\source\repos\Oswafeed\Oswafeed\resources\poco\bin\lib\Debug;C:\Users\tazti\source\repos\Oswafeed\Oswafeed\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3dll.lib;PocoJSONd.lib;OpenGL32.lib;PocoNetd.lib;PocoFoundationd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d  "$(ProjectDir)*.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="external\stb.h" />
@@ -161,12 +167,18 @@
     <ClInclude Include="include\KHR\khrplatform.h" />
     <ClInclude Include="include\Oswafeed\Dimension.h" />
     <ClInclude Include="include\Oswafeed\Image.h" />
+    <ClInclude Include="include\Oswafeed\IndexBuffer.h" />
     <ClInclude Include="include\Oswafeed\Item.h" />
     <ClInclude Include="include\Oswafeed\ItemService.h" />
+    <ClInclude Include="include\Oswafeed\Oswafeed.h" />
     <ClInclude Include="include\Oswafeed\Point.h" />
     <ClInclude Include="include\Oswafeed\Rect.h" />
     <ClInclude Include="include\Oswafeed\Scroller.h" />
     <ClInclude Include="include\Oswafeed\Shader.h" />
+    <ClInclude Include="include\Oswafeed\VertexBuffer.h" />
+    <ClInclude Include="include\Oswafeed\VertexArray.h" />
+    <ClInclude Include="include\Oswafeed\VertexBufferLayout.h" />
+    <ClInclude Include="Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Oswafeed.rc" />
@@ -181,13 +193,19 @@
     <ClCompile Include="include\glad\glad.c" />
     <ClCompile Include="src\Dimension.cpp" />
     <ClCompile Include="src\Image.cpp" />
+    <ClCompile Include="src\IndexBuffer.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\ItemService.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Oswafeed.cpp" />
     <ClCompile Include="src\Point.cpp" />
     <ClCompile Include="src\Rect.cpp" />
+    <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\Scroller.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\VertexArray.cpp" />
+    <ClCompile Include="src\VertexBuffer.cpp" />
+    <ClCompile Include="src\VertexBufferLayout.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

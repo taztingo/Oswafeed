@@ -100,8 +100,7 @@ std::vector<std::unique_ptr<Item>> ItemService::requestItems(Poco::Net::HTTPClie
 		{
 			return std::move(newItems);
 		}
-		Image newImage(std::move(requestedImage));
-		newItems.push_back(std::make_unique<Item>(title, description, newImage));
+		newItems.push_back(std::make_unique<Item>(title, description, std::move(requestedImage)));
 	}
 
 	return std::move(newItems);
@@ -140,7 +139,7 @@ void ItemService::update()
 		HTTPClientSession session(uri.getHost(), uri.getPort());
 		HTTPRequest request(HTTPRequest::HTTP_GET, path, HTTPMessage::HTTP_1_1);
 		HTTPResponse response;
-		items = std::move(requestItems(session, request, response));
+		items = requestItems(session, request, response);
 	}
 	catch (Exception& exc)
 	{
@@ -148,6 +147,7 @@ void ItemService::update()
 	}
 
 	// Run the logic to get JSON
+	hasUpdate = true;
 }
 
 bool ItemService::isUpdated()

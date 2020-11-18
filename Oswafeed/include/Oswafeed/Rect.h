@@ -16,6 +16,8 @@ public:
 	Rect(const Point& topLeft, const Point& bottomRight, float z);
     void move(const Point& vector);
     void resize(const Dimension& dimension);
-	std::vector<GLfloat> getVertices();
-    std::vector<GLuint> getIndices();
+	void getVertices(std::vector<GLfloat>& vertices, std::vector<GLuint>& indices);
+
+	Point& getTopLeft();
+	Point& getBottomRight();
 };
