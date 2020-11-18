@@ -14,11 +14,11 @@
     <Filter Include="Source">
       <UniqueIdentifier>{906817f3-1d61-4a07-a329-d07ddf40fd80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{7ed9e42a-7ffe-479a-8b55-5fd15fa3d1f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="external\stb.h">
-      <Filter>External</Filter>
-    </ClInclude>
     <ClInclude Include="include\Oswafeed\Dimension.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -71,6 +71,12 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="include\Oswafeed\Renderer.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stb\stb_image.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\Texture.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -142,5 +148,19 @@
     <ClCompile Include="src\Renderer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="include\stb\stb_image.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\simple.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\simple.vs">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

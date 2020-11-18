@@ -9,6 +9,8 @@
 #include "Oswafeed/VertexArray.h"
 #include "Oswafeed/VertexBufferLayout.h"
 #include "Oswafeed/Renderer.h"
+#include "Oswafeed/Texture.h"
+#include "Oswafeed/Shader.h"
 
 void Oswafeed::errorCallback(int error, const char* description)
 {
@@ -61,11 +63,6 @@ bool Oswafeed::initialize(int width, int height, std::string& name)
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     glfwSwapInterval(1);
 
-    if (!rectShader.compile() || !bgShader.compile())
-    {
-        return false;
-    }
-
     Point p(-.7f, .7f);
     Dimension d(1.4f, .2f);
     scroller.initialize(p, d);
@@ -76,10 +73,10 @@ bool Oswafeed::initialize(int width, int height, std::string& name)
 void Oswafeed::start()
 {
     GLfloat vertices[] = {
-        -.5f, .5f, 0.0f,   // Top left
-        -.5f, -.5f, 0.0f,  // Bottom left
-        .5f, -.5f, 0.0f,   // Bottom right
-        .5f, .5f, 0.0f     // Top right
+        -1.0, 1.0f, 0.0f, 1.0f,   // Top left
+        -1.0f, -1.0f, 0.0f, 0.0f,  // Bottom left
+        1.0f, -1.0f, 1.0f, 0.0,   // Bottom right
+        1.0f, 1.0f, 1.0f, 1.0f     // Top right
     };
 
     GLuint indices[] = {
@@ -87,14 +84,29 @@ void Oswafeed::start()
         2, 3, 0
     };
 
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+
     VertexArray va;
 
-    VertexBuffer vb(vertices, sizeof(GLfloat) * 4 * 3);
+    VertexBuffer vb(vertices, sizeof(GLfloat) * 4 * 4);
     VertexBufferLayout layout;
-    layout.push<GLfloat>(3);
+    layout.push<GLfloat>(2);
+    layout.push<GLfloat>(2);
     va.addBuffer(vb, layout);
     IndexBuffer ib(indices, 6);
     Renderer renderer;
+    Shader shader("shaders/simple.vs", "shaders/simple.fs");
+    shader.bind();
+
+    Texture texture("resources/background-compress.jpg");
+    texture.bind(0);
+    shader.setUniform1i("u_Texture", 0);
+
+    va.unbind();
+    ib.unbind();
+    vb.unbind();
+    shader.unbind();
     
     bool alreadyRan = false;
     while (!glfwWindowShouldClose(window))
@@ -119,7 +131,7 @@ void Oswafeed::start()
         //}
 
         renderer.clear();
-        renderer.draw(va, ib, rectShader);
+        renderer.draw(va, ib, shader);
 
         
         //va.unbind();
@@ -136,9 +148,8 @@ void Oswafeed::start()
     glfwTerminate();
 }
 
-Oswafeed::Oswafeed()
-    : rectShader("shaders/simple.vs", "shaders/simple.fs"),
-    bgShader("shaders/bg.vs", "shaders/bg.fs")
+Oswafeed::Oswafeed() : 
+    height(0), width(0), window(0)
 {
 
 }
