@@ -46,6 +46,8 @@ bool Oswafeed::initialize(int width, int height, std::string& name)
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     window = glfwCreateWindow(this->width, this->height, this->name.c_str(), NULL, NULL);
     if (!window)
     {
@@ -84,8 +86,8 @@ void Oswafeed::start()
         2, 3, 0
     };
 
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glEnable(GL_BLEND);
 
     VertexArray va;
 
