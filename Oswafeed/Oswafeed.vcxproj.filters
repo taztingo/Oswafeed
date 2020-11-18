@@ -55,9 +55,6 @@
     <ClInclude Include="include\GLFW\glfw3native.h">
       <Filter>External</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="include\Oswafeed\Oswafeed.h">
       <Filter>Include</Filter>
     </ClInclude>
@@ -71,6 +68,9 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="include\Oswafeed\VertexBuffer.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Oswafeed\Renderer.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -127,9 +127,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="src\VertexBuffer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -140,6 +137,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="src\VertexBufferLayout.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

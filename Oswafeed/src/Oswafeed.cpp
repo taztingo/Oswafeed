@@ -8,6 +8,7 @@
 #include "Oswafeed/IndexBuffer.h"
 #include "Oswafeed/VertexArray.h"
 #include "Oswafeed/VertexBufferLayout.h"
+#include "Oswafeed/Renderer.h"
 
 void Oswafeed::errorCallback(int error, const char* description)
 {
@@ -93,6 +94,7 @@ void Oswafeed::start()
     layout.push<GLfloat>(3);
     va.addBuffer(vb, layout);
     IndexBuffer ib(indices, 6);
+    Renderer renderer;
     
     bool alreadyRan = false;
     while (!glfwWindowShouldClose(window))
@@ -116,13 +118,10 @@ void Oswafeed::start()
             
         //}
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        renderer.clear();
+        renderer.draw(va, ib, rectShader);
 
-        rectShader.use();
-        va.bind();
-        ib.bind();
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        
         //va.unbind();
         //scroller.render();
 

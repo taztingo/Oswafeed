@@ -173,12 +173,12 @@
     <ClInclude Include="include\Oswafeed\Oswafeed.h" />
     <ClInclude Include="include\Oswafeed\Point.h" />
     <ClInclude Include="include\Oswafeed\Rect.h" />
+    <ClInclude Include="include\Oswafeed\Renderer.h" />
     <ClInclude Include="include\Oswafeed\Scroller.h" />
     <ClInclude Include="include\Oswafeed\Shader.h" />
     <ClInclude Include="include\Oswafeed\VertexBuffer.h" />
     <ClInclude Include="include\Oswafeed\VertexArray.h" />
     <ClInclude Include="include\Oswafeed\VertexBufferLayout.h" />
-    <ClInclude Include="Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Oswafeed.rc" />

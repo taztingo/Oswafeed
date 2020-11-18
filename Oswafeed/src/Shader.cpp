@@ -38,7 +38,7 @@ bool Shader::compile()
     return true;
 }
 
-void Shader::use()
+void Shader::use() const
 {
     glUseProgram(shader);
 }

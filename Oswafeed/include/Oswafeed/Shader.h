@@ -16,5 +16,5 @@ public:
     Shader() = delete;
     ~Shader() = default;
     bool compile();
-    void use();
+    void use() const;
 };
