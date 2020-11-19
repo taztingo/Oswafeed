@@ -20,24 +20,28 @@ void Rect::getVertices(std::vector<GLfloat>& vertices, std::vector<GLuint>& indi
     // Top right
     vertices.push_back(bottomRight.x * unit);
     vertices.push_back(topLeft.y * unit);
-    vertices.push_back(z);
+    vertices.push_back(1.0f);
+    vertices.push_back(1.0f);
 
     // Bottom right
     vertices.push_back(bottomRight.x * unit);
     vertices.push_back(bottomRight.y * unit);
-    vertices.push_back(z);
+    vertices.push_back(1.0f);
+    vertices.push_back(0.0f);
 
     // Bottom left
     vertices.push_back(topLeft.x * unit);
     vertices.push_back(bottomRight.y * unit);
-    vertices.push_back(z);
+    vertices.push_back(0.0f);
+    vertices.push_back(0.0f);
 
     // Top left
     vertices.push_back(topLeft.x * unit);
     vertices.push_back(topLeft.y * unit);
-    vertices.push_back(z);
+    vertices.push_back(0.0f);
+    vertices.push_back(1.0f);
 
-    int index = (vertices.size() / 3) - 4;
+    int index = (vertices.size() / 4) - 4;
     indices.push_back(index + 0);
     indices.push_back(index + 1);
     indices.push_back(index + 3);

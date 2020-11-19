@@ -61,15 +61,7 @@ void Scroller::render()
     {
         auto& rect = item->getRect();
         rect.getVertices(vertices, indices);
-    }
-
-    if (items.size() > 0)
-    {
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLfloat), &vertices[0], GL_STATIC_DRAW);
-        glDrawElements(GL_TRIANGLES, items.size() * 6, GL_UNSIGNED_INT, 0);
-    }
-    
+    }    
 }
 
 void Scroller::move(Point& p)
@@ -94,4 +86,19 @@ void Scroller::initialize(Point& location, Dimension& size)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     move(location);
     resize(size);
+}
+
+const std::vector<GLfloat>& Scroller::getVertices() const
+{
+    return vertices;
+}
+
+const std::vector<GLuint>& Scroller::getIndices() const
+{
+    return indices;
+}
+
+const std::vector<std::unique_ptr<Item>>& Scroller::getItems() const
+{
+    return items;
 }

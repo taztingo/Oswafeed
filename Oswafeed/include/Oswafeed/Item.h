@@ -2,20 +2,21 @@
 
 #include <string>
 #include <memory>
-#include <istream>
-#include "Rect.h"
+#include <vector>
+#include "Oswafeed/Rect.h"
+#include "Oswafeed/Texture.h"
 
 class Item
 {
 	std::string name;
 	std::string description;
 	Rect rect;
-	std::unique_ptr<std::istream> image;
+	Texture texture;
 
 public:
-	Item(const std::string& name, const std::string& description, std::unique_ptr<std::istream> image);
+	Item(const std::string& name, const std::string& description, const std::vector<unsigned char>& imageData);
 	std::string& getName();
 	std::string& getDescription();
-	std::istream& getImage();
+	const Texture& getTexture() const;
 	Rect& getRect();
 };

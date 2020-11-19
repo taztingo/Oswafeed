@@ -1,9 +1,16 @@
 #include "Oswafeed/ItemService.h"
 #include "Oswafeed/Item.h"
+#include "Poco/Net/SSLManager.h"
+#include "Poco/Net/Context.h"
+#include "Poco/Net/ConsoleCertificateHandler.h"
 
 ItemService::ItemService()
 {
+	//Poco::Net::SSLManager::instance().defaultClientContext();
+	Poco::SharedPtr<Poco::Net::InvalidCertificateHandler> pCert = new Poco::Net::ConsoleCertificateHandler(false);
+	Poco::Net::Context::Ptr pContext = new Poco::Net::Context(Poco::Net::Context::CLIENT_USE, "rootcert.pem");
 
+	Poco::Net::SSLManager::instance().initializeClient(0, pCert, pContext);
 }
 
 std::vector<std::unique_ptr<Item>> ItemService::requestItems(Poco::Net::HTTPClientSession& session, Poco::Net::HTTPRequest& request, Poco::Net::HTTPResponse& response)
@@ -100,7 +107,8 @@ std::vector<std::unique_ptr<Item>> ItemService::requestItems(Poco::Net::HTTPClie
 		{
 			return std::move(newItems);
 		}
-		newItems.push_back(std::make_unique<Item>(title, description, std::move(requestedImage)));
+		std::vector<unsigned char> data(std::istreambuf_iterator<char>(*requestedImage), {});
+		newItems.push_back(std::make_unique<Item>(title, description, data));
 	}
 
 	return std::move(newItems);

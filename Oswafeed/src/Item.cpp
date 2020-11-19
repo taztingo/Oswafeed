@@ -1,8 +1,9 @@
 #include "Oswafeed/Item.h"
+#include <vector>
 
 
-Item::Item(const std::string& name, const std::string& description, std::unique_ptr<std::istream> image) :
-	name(name), description(description), image(std::move(image))
+Item::Item(const std::string& name, const std::string& description, const std::vector<unsigned char>& imageData) :
+	name(name), description(description), texture(imageData)
 {
 
 }
@@ -17,9 +18,9 @@ std::string& Item::getDescription()
 	return description;
 }
 
-std::istream& Item::getImage()
+const Texture& Item::getTexture() const
 {
-	return *image;
+	return texture;
 }
 
 Rect& Item::getRect()

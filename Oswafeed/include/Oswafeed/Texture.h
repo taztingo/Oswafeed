@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 class Texture
 {
@@ -13,6 +14,7 @@ class Texture
 
 public:
 	Texture(const std::string& path);
+	Texture(const std::vector<unsigned char>& imageData);
 	~Texture();
 
 	void bind(unsigned int slot = 0) const;

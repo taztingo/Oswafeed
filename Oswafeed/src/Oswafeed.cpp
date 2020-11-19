@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
@@ -74,35 +75,64 @@ bool Oswafeed::initialize(int width, int height, std::string& name)
 
 void Oswafeed::start()
 {
-    GLfloat vertices[] = {
+    // Create the background
+    std::vector<GLfloat> vertices = {
         -1.0, 1.0f, 0.0f, 1.0f,   // Top left
         -1.0f, -1.0f, 0.0f, 0.0f,  // Bottom left
         1.0f, -1.0f, 1.0f, 0.0,   // Bottom right
         1.0f, 1.0f, 1.0f, 1.0f     // Top right
     };
 
-    GLuint indices[] = {
+    std::vector<GLuint> indices = {
         0, 1, 2,
         2, 3, 0
     };
+
+    std::vector<std::unique_ptr<Renderable>> renderables;
+    auto backgroundTexture = Texture("resources/background-compress.jpg");
+    auto background = std::make_unique<Renderable>(0, 6, backgroundTexture);
+    renderables.push_back(std::move(background));
+    /////////////////////////////////
+
+    // We aren't always guaranteed to have an update
+    service.update();
+    if (service.isUpdated())
+    {
+        for (auto& item : service.getItems())
+        {
+            scroller.add(std::move(item));
+        }
+    }
+    scroller.render();
+
+    for (auto& item : scroller.getItems())
+    {
+        auto newItem = std::make_unique<Renderable>(indices.size(), 6, item->getTexture());
+        item->getRect().getVertices(vertices, indices);
+        renderables.push_back(std::move(newItem));
+    }
+
+
 
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glEnable(GL_BLEND);
 
     VertexArray va;
 
-    VertexBuffer vb(vertices, sizeof(GLfloat) * 4 * 4);
+    VertexBuffer vb(&vertices[0], vertices.size() * sizeof(GLfloat));
+    // vb(&vertices[0], sizeof(GLfloat) * 4 * 4);
     VertexBufferLayout layout;
     layout.push<GLfloat>(2);
     layout.push<GLfloat>(2);
     va.addBuffer(vb, layout);
-    IndexBuffer ib(indices, 6);
+    IndexBuffer ib(&indices[0], indices.size());
+    //IndexBuffer ib(&indices[0], indices);
     Renderer renderer;
     Shader shader("shaders/simple.vs", "shaders/simple.fs");
     shader.bind();
 
-    Texture texture("resources/background-compress.jpg");
-    texture.bind(0);
+    //Texture texture("resources/background-compress.jpg");
+    //texture.bind(0);
     shader.setUniform1i("u_Texture", 0);
 
     va.unbind();
@@ -110,36 +140,18 @@ void Oswafeed::start()
     vb.unbind();
     shader.unbind();
     
-    bool alreadyRan = false;
     while (!glfwWindowShouldClose(window))
     {
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
 
 
-        // We aren't always guaranteed to have an update
-        //service.update();
-        //if (service.isUpdated())
-        //{
-        //    if (!alreadyRan)
-        //    {
-        //        alreadyRan = true;
-        //        for (auto& item : service.getItems())
-        //        {
-        //            scroller.add(std::move(item));
-        //        }
-        //    }
-            
-        //}
-
         renderer.clear();
-        renderer.draw(va, ib, shader);
-
+        for (auto& renderable : renderables)
+        {
+            renderer.draw(va, ib, *renderable, shader);
+        }
         
-        //va.unbind();
-        //scroller.render();
-
-        // We need to do our render logic here
         
 
         glfwSwapBuffers(window);

@@ -26,4 +26,8 @@ public:
 	void move(Point& newLocation);
 	void resize(Dimension& d);
 	void initialize(Point& location, Dimension& size);
+
+	const std::vector<GLfloat>& getVertices() const;
+	const std::vector<GLuint>& getIndices() const;
+	const std::vector<std::unique_ptr<Item>>& getItems() const;
 };
