@@ -41,13 +41,12 @@ bool Oswafeed::initialize(int width, int height, std::string& name)
     this->height = height;
     this->name = std::move(name);
 
-    // Not sure how to set this
+    // Temporarily commented out
     //glfwSetErrorCallback(window);
-
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-    glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+    //glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     window = glfwCreateWindow(this->width, this->height, this->name.c_str(), NULL, NULL);
     if (!window)
@@ -66,8 +65,8 @@ bool Oswafeed::initialize(int width, int height, std::string& name)
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     glfwSwapInterval(1);
 
-    Point p(-.7f, .7f);
-    Dimension d(1.4f, .2f);
+    Point p(-9.f, 9.f);
+    Dimension d(1.f, 1.f);
     scroller.initialize(p, d);
 
     return true;

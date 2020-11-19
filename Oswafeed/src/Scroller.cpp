@@ -40,16 +40,34 @@ void Scroller::moveLeft()
 	}
 
 	selected -= 1;
+
+    for (auto& item : items)
+    {
+        auto& itemRect = item->getRect();
+        auto& topLeft = itemRect.getTopLeft();
+        Point p(topLeft.x - itemPadding, rect.getTopLeft().y);
+        item->getRect().move(p);
+    }
+    // Move everything
 }
 
 void Scroller::moveRight()
 {
-	if (items.size() > 0 && selected < items.size() - 1)
+	if (items.size() > 0 && selected >= items.size() - 1)
 	{
 		return;
 	}
 
 	selected += 1;
+
+    // Move everything
+    for (auto& item : items)
+    {
+        auto& itemRect = item->getRect();
+        auto& topLeft = itemRect.getTopLeft();
+        Point p(itemPadding, 0.0f);
+        item->getRect().move(p);
+    }
 }
 
 void Scroller::render()

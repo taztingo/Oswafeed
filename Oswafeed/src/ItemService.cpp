@@ -4,12 +4,22 @@
 #include "Poco/Net/Context.h"
 #include "Poco/Net/ConsoleCertificateHandler.h"
 
+#include "Poco/Net/HTTPCredentials.h"
+#include "Poco/JSON/Parser.h"
+#include "Poco/StreamCopier.h"
+#include "Poco/NullStream.h"
+#include "Poco/Path.h"
+#include "Poco/URI.h"
+#include "Poco/Exception.h"
+#include "Poco/URIStreamOpener.h"
+#include "Poco/Net/HTTPSStreamFactory.h"
+
+
 ItemService::ItemService()
 {
 	//Poco::Net::SSLManager::instance().defaultClientContext();
 	Poco::SharedPtr<Poco::Net::InvalidCertificateHandler> pCert = new Poco::Net::ConsoleCertificateHandler(false);
 	Poco::Net::Context::Ptr pContext = new Poco::Net::Context(Poco::Net::Context::CLIENT_USE, "rootcert.pem");
-
 	Poco::Net::SSLManager::instance().initializeClient(0, pCert, pContext);
 }
 
@@ -17,9 +27,9 @@ std::vector<std::unique_ptr<Item>> ItemService::requestItems(Poco::Net::HTTPClie
 {
 	session.sendRequest(request);
 	std::istream& rs = session.receiveResponse(response);
-	Parser parser;
+	Poco::JSON::Parser parser;
 	auto data = parser.parse(rs);
-	Object::Ptr json = data.extract<Object::Ptr>();
+	auto json = data.extract<Poco::JSON::Object::Ptr>();
 	std::vector<std::unique_ptr<Item>> newItems;
 	if (!json->has("dates"))
 	{
@@ -118,12 +128,12 @@ std::unique_ptr<std::istream> ItemService::requestImage(const std::string& url)
 {
 	try
 	{
-		URI uri(url);
-		HTTPSStreamFactory factory;
+		Poco::URI uri(url);
+		Poco::Net::HTTPSStreamFactory factory;
 		auto stream = std::unique_ptr<std::istream>(factory.open(uri));
 		return std::move(stream);
 	}
-	catch (Exception& exc)
+	catch (Poco::Exception& exc)
 	{
 		std::cout << "Exception: " << exc.displayText() << std::endl;
 	}
@@ -141,15 +151,15 @@ void ItemService::update()
 	isUpdating = true;
 	try
 	{
-		URI uri(apiURl + date);
+		Poco::URI uri(apiURl + date);
 		std::string path(uri.getPathAndQuery());
 
-		HTTPClientSession session(uri.getHost(), uri.getPort());
-		HTTPRequest request(HTTPRequest::HTTP_GET, path, HTTPMessage::HTTP_1_1);
-		HTTPResponse response;
+		Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
+		Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_GET, path, Poco::Net::HTTPMessage::HTTP_1_1);
+		Poco::Net::HTTPResponse response;
 		items = requestItems(session, request, response);
 	}
-	catch (Exception& exc)
+	catch (Poco::Exception& exc)
 	{
 		std::cout << "Exception: " << exc.displayText() << std::endl;
 	}
